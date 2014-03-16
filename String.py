@@ -26,14 +26,14 @@ def buildBacktrackArray(x):
     t[0] = -1
     t[1] = 0
     iT = 2
-    iW = 0
+    iX = 0
     while (iT < len(x)):
-        if x[iT - 1] == x[iW]:
+        if x[iT - 1] == x[iX]:
             iW += 1
-            t[iT] = iW;
+            t[iT] = iX;
             iT += 1
         elif iW > 0:
-            iW = t[iW]
+            iW = t[iX]
         else:
             t[iT] = 0
             iT += 1
