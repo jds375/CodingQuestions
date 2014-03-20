@@ -4,7 +4,7 @@ Here I have coded up solutions to many well-known interview questions from popul
 #### String-based Questions ####
 Questions involving string manipulations are very common. They are often straight-forward and it is easy to find a decent solution to them. However, finding the best solutions is often quite tricky.
 
-##### The Substring Search Problem #####
+##### The Substring Search Problem (KMP Algorithm) #####
 <i> Question: Substring Write a program to determine whether an input string x is a substring of another input string y. For example, "bat" is a substring of "abate", but not of "beat". </i>
 <br>
 <p>The obvious solution to this problem is a nested for-loop where we iterate about the string y and then iterate about the string x, checking letter by letter if we have a match. This solution is O(x·y), which is very good. But, we can still slightly improve our algorithm. There is room for improvement because the algorithm above doesn't use all of the information available to solve the problem. For example, suppose x is 1,000 characters where the first 999 characters are 'A' and the last character is 'B'. Suppose that y is 1 billion characters long and only contains the character 'A'. In the naive algorithm we would make about 1 trillion comparisons because we would iterate through the 1,000 characters in x one billion times (once for each starting index in y). However, consider just the first iteration. We find 999 matches to the character 'A' and then fail on the thousandth for the character 'B'. For the next iteration we shouldn't need to backtrack and retest the first 998 values because we already did the comparison and know that they will all be 'A's. If we use this logic for the entire string, then after the first iteration, we will only be making 2 comparisons for each step through y. Thus, it would only a couple billion comparisons as opposed to a trillion. The idea is that when we fail a match, we can often jump ahead in y by taking into account the comparisons we have already done on x.</p>
@@ -47,4 +47,4 @@ def buildBacktrackArray(x):
             iT += 1
     return t
 ````
-We are now done. We observe that the running time is O(x + y) since building the table is O(x) and now the substring search is O(y). Most importantly, it avoids many of the worst-case scenarios that the naive algorithm encounters. Lastly, note that this can be easily modified to return the starting index where x occurs in y.
+We are now done. We observe that the running time is O(x + y) since building the table is O(x) and now the substring search is O(y). Most importantly, it avoids many of the worst-case scenarios that the naive algorithm encounters. Lastly, note that this can be easily modified to return the starting index where x occurs in y. Note that this solution is effectively an implementation of the Knuth–Morris–Pratt algorithm.
