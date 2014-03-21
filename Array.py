@@ -16,6 +16,6 @@ def rTernarySearch(a, s, t, l, r):
     if s == t:
         return a[s]
     elif a[s] <= a[t]:
-        return rTernarySearch(a, t, r, t, r)
+        return rTernarySearch(a, s+1, r, s+1, r)
     else:
         return rTernarySearch(a, l, t-1, l, t-1)
