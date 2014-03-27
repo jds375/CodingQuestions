@@ -4,6 +4,17 @@ Here I have coded up solutions to many well-known interview questions from popul
 ### Array-Based Questions ###
 Questions involving arrays are often some of the trickiest problems. This is because they are so simple that it is quite difficult to exploit the trick that can make your algorithm time and space efficient.
 
+##### The Maximum Subarray Problem (Partial Sorting) #####
+<i> Consider an array a[] of n integers. Given a number k we want to return a new array containing the k smallest integers. Implement this as time-efficiently as possible</i>
+<br>
+The first solution that likely comes to mind is to iterate about the array <i>a[] k </i>times. In each iteration we find the minimum, remove it, and place it in the new array. This works, but operates in O(n*k) times since we iterate about <i>a[]</i> of length <i>n</i> for a total of <i>k</i> times.
+<br>
+The next solution that one might think of is sorting. We can sort in O(n * log n). We then return the subarray from indices 0 to <i>k</i>-1. However, this isn't all that much better since here <i>k</i> and <i>log n</i> are relatively close since <i>k</i> is likely much smaller than <i>n</i>. 
+<br>
+It might also be useful to try a data structure. The ideal one for this situation would be a heap. A heap allows us to find the minimum element in O(1), insert in O(1) or O(log n) depending on the implementation, and delete the minimum element in O(log n). Suppose insertion is O(1) since we have used a Fibonacci or Pairing type of heap. Our insertions of the entire array takes O(n) time. We then make <i>k</i> calls to findMin. However, for each call to findMin, we must call deleteMin after so that when we query again we get the next minimum. This takes time O(k * log n). This is a pretty good solution. However, we can still do slightly better.
+<br>
+We do this by modifying our sorting method from above. Consider quicksort, which on average runs in O(n * log n). Recall that quickosrt works by picking a pivot element. We then put all elements less than the pivot to the left and all elements greater than the pivot to the right (in any order). We then recursively apply this to the two resulting sublists. We can improve this algorithm if we aren't worried about sorting the entire list. 
+
 ##### The Array Maximum Problem (Ternary Search) #####
 <i>An integer array contains elements in (strictly) increasing order till some point and then (strictly) decreasing order, return the index of maximum number. Solution should be less than O(n). The array is non-empty. Ex - {1,2,3,4,5,3,1}</i>
 <br>
