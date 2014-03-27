@@ -26,7 +26,7 @@ def rTernarySearch(a, s, t, l, r):
     else:
         return rTernarySearch(a, l+((t-l)/3), l+(2*(t-l)/3), l, t-1)
 ````
-
+Let us analyze the runtime. Each time we cut the amount of work to be done by 1/3. Thus, we describe our algorithm with the recurrence <i>t(n) = t(2n/3) + O(1)</i>. The master theorem says this is O(log n) and we are done.
 ### String-based Questions ###
 Questions involving string manipulations are very common. They are often straight-forward and it is easy to find a decent solution to them. However, finding the best solutions is often quite tricky.
 
